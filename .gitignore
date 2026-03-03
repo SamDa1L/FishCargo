@@ -97,3 +97,9 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Project documentation (local planning/docs, do not commit)
+/[Dd]ocs/
+
+# Codex temporary workspace files
+/.codex_tmp/
