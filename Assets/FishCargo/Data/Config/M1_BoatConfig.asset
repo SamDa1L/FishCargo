@@ -22,5 +22,7 @@ MonoBehaviour:
   maxMoveSpeed: 5
   acceleration: 15
   deceleration: 20
+  inputResponse: 1
+  stickDeadZone: 0.15
   leftBoundary: -12
   rightBoundary: 12

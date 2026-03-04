@@ -38,15 +38,26 @@ namespace FishCargo.Runtime.Gameplay.Boat
         [Range(-0.05f, 0.10f)]
         public float surfaceOffset = 0.0f;
 
-        [Header("移动参数（S3 阶段使用）")]
+        [Header("移动参数（S3）")]
         [Tooltip("最大移动速度（单位/秒）")]
+        [Range(4.0f, 6.5f)]
         public float maxMoveSpeed = 5.0f;
 
-        [Tooltip("加速度（越大手感越灵敏）")]
+        [Tooltip("加速度（按住输入后的提速强度）")]
+        [Range(10.0f, 22.0f)]
         public float acceleration = 15.0f;
 
-        [Tooltip("减速度（松开输入后的制动速度）")]
+        [Tooltip("减速度（松开输入后的制动强度）")]
+        [Range(12.0f, 28.0f)]
         public float deceleration = 20.0f;
+
+        [Tooltip("输入响应系数（输入到速度变化的整体倍率）")]
+        [Range(0.8f, 1.2f)]
+        public float inputResponse = 1.0f;
+
+        [Tooltip("摇杆死区（小于此值的输入按 0 处理）")]
+        [Range(0.10f, 0.25f)]
+        public float stickDeadZone = 0.15f;
 
         [Header("边界参数")]
         [Tooltip("左边界 X（世界坐标）")]
