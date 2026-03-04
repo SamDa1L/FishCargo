@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9d86d1dd8ee84789bb378421809f3, type: 3}
+  m_Name: M1_SceneConfig
+  m_EditorClassIdentifier: Assembly-CSharp::FishCargo.Runtime.Core.SceneConfig
+  seaLevelY: 0
+  seaLevelScreenRatio: 0.3
+  orthographicSize: 10
+  cameraInitialX: 0
+  cameraInitialY: 0
+  cameraInitialZ: -10
+  horizontalSmoothSpeed: 5
+  horizontalDeadZone: 0.5
+  leftBoundary: -12
+  rightBoundary: 12
+  mainScaleInterval: 10
+  showSubScale: 0
+  subScaleInterval: 10
+  maxDepth: 100
+  pixelizedResolution: {x: 320, y: 180}
+  scaleFactor: 6
+  autoCalculateScale: 1
+  hudSafeAreaMargin: 0.05

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe094250b68f051419cdbac0c4fb8252, type: 3}
+  m_Name: M1_BoatConfig
+  m_EditorClassIdentifier: 
+  waveAmplitude: 0.1
+  waveFrequency: 0.5
+  floatFollow: 0.7
+  pitchDamping: 3
+  normalAlign: 0.5
+  maxPitch: 8
+  surfaceOffset: 0
+  maxMoveSpeed: 5
+  acceleration: 15
+  deceleration: 20
+  leftBoundary: -12
+  rightBoundary: 12
