@@ -65,5 +65,53 @@ namespace FishCargo.Runtime.Gameplay.Boat
 
         [Tooltip("右边界 X（世界坐标）")]
         public float rightBoundary = 12.0f;
+
+        [Header("瞄准参数（S4）")]
+        [Tooltip("最小瞄准角（船底半圆，-180°）")]
+        [Range(-180f, -90f)]
+        public float minAimAngle = -180f;
+
+        [Tooltip("最大瞄准角（船底半圆，0°）")]
+        [Range(-90f, 0f)]
+        public float maxAimAngle = 0f;
+
+        [Tooltip("手柄右摇杆角速度（度/秒）")]
+        [Range(90f, 300f)]
+        public float aimRotateSpeed = 180f;
+
+        [Tooltip("右摇杆死区（小于此值不更新角度）")]
+        [Range(0.15f, 0.30f)]
+        public float aimStickDeadZone = 0.20f;
+
+        [Tooltip("瞄准时是否锁定移动（S4 默认 false）")]
+        public bool lockMoveWhenAiming = false;
+
+        [Header("鱼叉参数（S4）")]
+        [Tooltip("鱼叉最大飞行距离")]
+        [Range(8f, 18f)]
+        public float harpoonMaxDistance = 12f;
+
+        [Tooltip("鱼叉飞出速度（单位/秒）")]
+        [Range(10f, 28f)]
+        public float harpoonFlySpeed = 18f;
+
+        [Tooltip("鱼叉回收速度（单位/秒）")]
+        [Range(12f, 35f)]
+        public float harpoonRetractSpeed = 22f;
+
+        [Tooltip("回收完成后额外冷却时间（秒）")]
+        [Range(0f, 1.2f)]
+        public float postRetractCooldown = 0.35f;
+
+        [Tooltip("鱼叉头部本地偏移（相对于 HarpoonContainer，X=前方）")]
+        public Vector3 harpoonTipLocalOffset = new Vector3(0.9f, 0f, 0f);
+
+        [Tooltip("鱼叉视觉缩放（运行时实例化后应用）")]
+        [Range(0.2f, 10.0f)]
+        public float harpoonVisualScale = 5f;
+
+        [Tooltip("鱼叉视觉朝向补偿角（度，用于修正模型朝向轴与发射方向不一致，默认 0）")]
+        [Range(-180f, 180f)]
+        public float harpoonVisualAngleOffset = 0f;
     }
 }

@@ -26,3 +26,15 @@ MonoBehaviour:
   stickDeadZone: 0.15
   leftBoundary: -12
   rightBoundary: 12
+  aimRotateSpeed: 120
+  aimStickDeadZone: 0.15
+  lockMoveWhenAiming: 0
+  minAimAngle: -180
+  maxAimAngle: 0
+  harpoonMaxDistance: 12
+  harpoonFlySpeed: 6
+  harpoonRetractSpeed: 6
+  postRetractCooldown: 1
+  harpoonTipLocalOffset: {x: 0.9, y: 0, z: 0}
+  harpoonVisualScale: 5
+  harpoonVisualAngleOffset: -90

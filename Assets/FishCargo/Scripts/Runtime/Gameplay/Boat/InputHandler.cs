@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 namespace FishCargo.Runtime.Gameplay.Boat
 {
     /// <summary>
-    /// 输入统一层（S3）
-    /// 统一读取键盘 A/D 与手柄左摇杆 X 轴，输出归一化 MoveAxisX
-    /// 双设备优先级：绝对值更大的输入源优先；绝对值相等时取最近变化的输入源
+    /// 输入统一层（S3 + S4）
+    /// S3: 键盘 A/D + 手柄左摇杆 X 轴 → MoveAxisX
+    /// S4: 鼠标右键/LT → AimHold，鼠标左键/RT → Fire，鼠标位置/右摇杆X → 瞄准角度
     /// </summary>
     public class InputHandler : MonoBehaviour
     {
@@ -15,6 +15,18 @@ namespace FishCargo.Runtime.Gameplay.Boat
 
         /// <summary>归一化横向输入，范围 [-1, +1]</summary>
         public float MoveAxisX { get; private set; }
+
+        /// <summary>瞄准按住（鼠标右键 / LT）</summary>
+        public bool AimHold { get; private set; }
+
+        /// <summary>发射触发（鼠标左键 / RT）</summary>
+        public bool FirePressed { get; private set; }
+
+        /// <summary>鼠标世界位置（用于瞄准角度计算）</summary>
+        public Vector3 MouseWorldPosition { get; private set; }
+
+        /// <summary>右摇杆 X 轴（用于手柄瞄准角度控制）</summary>
+        public float RightStickX { get; private set; }
 
         private float _keyboardAxis;
         private float _gamepadAxis;
@@ -29,6 +41,7 @@ namespace FishCargo.Runtime.Gameplay.Boat
             ReadKeyboard();
             ReadGamepad();
             ResolvePriority();
+            ReadAimAndFire();
         }
 
         void ReadKeyboard()
@@ -72,6 +85,38 @@ namespace FishCargo.Runtime.Gameplay.Boat
                 result = _lastChangedSource == 0 ? _keyboardAxis : _gamepadAxis;
 
             MoveAxisX = result;
+        }
+
+        void ReadAimAndFire()
+        {
+            // 瞄准按住（鼠标右键 / LT）
+            bool aimMouse = Mouse.current != null && Mouse.current.rightButton.isPressed;
+            bool aimGamepad = Gamepad.current != null && Gamepad.current.leftTrigger.ReadValue() > 0.5f;
+            AimHold = aimMouse || aimGamepad;
+
+            // 发射触发（鼠标左键 / RT）
+            bool fireMouse = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
+            bool fireGamepad = Gamepad.current != null && Gamepad.current.rightTrigger.ReadValue() > 0.5f;
+            FirePressed = fireMouse || fireGamepad;
+
+            // 鼠标世界位置
+            if (Mouse.current != null && Camera.main != null)
+            {
+                Vector2 screenPos = Mouse.current.position.ReadValue();
+                MouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 10f));
+            }
+
+            // 右摇杆 X 轴
+            if (Gamepad.current != null)
+            {
+                float raw = Gamepad.current.rightStick.x.ReadValue();
+                float deadZone = config != null ? config.aimStickDeadZone : 0.20f;
+                RightStickX = Mathf.Abs(raw) < deadZone ? 0f : raw;
+            }
+            else
+            {
+                RightStickX = 0f;
+            }
         }
     }
 }

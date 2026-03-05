@@ -14,6 +14,9 @@ namespace FishCargo.Runtime.Gameplay.Boat
         [Header("输入")]
         public InputHandler inputHandler;
 
+        [Header("鱼叉状态机引用（用于 lockMoveWhenAiming）")]
+        public FishCargo.Runtime.Gameplay.Harpoon.HarpoonStateMachine harpoonStateMachine;
+
         [Header("调试")]
         public bool showDebugInfo = true;
 
@@ -28,7 +31,12 @@ namespace FishCargo.Runtime.Gameplay.Boat
         {
             if (config == null || inputHandler == null) return;
 
-            float axis = inputHandler.MoveAxisX * config.inputResponse;
+            // 检查是否需要锁定移动（瞄准时）
+            bool shouldLockMove = config.lockMoveWhenAiming &&
+                                  harpoonStateMachine != null &&
+                                  harpoonStateMachine.CurrentState == FishCargo.Runtime.Gameplay.Harpoon.HarpoonStateMachine.State.Aiming;
+
+            float axis = shouldLockMove ? 0f : inputHandler.MoveAxisX * config.inputResponse;
             UpdateSpeed(axis);
             ApplyMovement();
             RecordDebugData(axis);
